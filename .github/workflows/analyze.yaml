@@ -24,7 +24,7 @@ jobs:
           curl -O https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.lua
 
           luau-lsp analyze --definitions=globalTypes.d.lua --base-luaurc=.luaurc \
-              --sourcemap=sourcemap.json --settings=.vscode/settings.json \
+              --sourcemap=sourcemap.json --settings=.vscode/settings.json --flag:LuauSolverV2=true \
               --ignore Packages/**/*.lua --ignore Packages/**/*.luau \
               src/
 
