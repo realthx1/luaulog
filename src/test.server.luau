@@ -5,7 +5,7 @@ local log = require "./"
 
 local logger = log.Logger.new({
 	log.TimestampEnricher(true, true),
-	log.SourceEnricher(true, 2),
+	log.SourceEnricher(true),
 	log.LogLevelEnricher(),
 	log.TraceEnricher(),
 }, { log.RobloxLogSink() })
@@ -28,6 +28,3 @@ local bm_t: number = os.clock()
 logger:Info("but this should print tho")
 local bm_dt: number = os.clock() - bm_t
 print(("%.3fus"):format(bm_dt * 1000000))
-
--- roblox output functions are super expensive (200us)
--- timestamp enricher is expensive due to DateTime usage

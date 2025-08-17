@@ -1,9 +1,9 @@
 --!optimize 2
 --!native
 
--- Roblox output functions (at least in studio) take a STUPIDLY long amount of time to run
--- we are talking about 50x the time pure logger takes to run
--- usually, one call of those functions takes 180-260us in studio
+-- Roblox output functions are STUPIDLY slow
+-- we are talking about 30x in studio and 4x the time pure logger call takes
+-- the functions take 120us in studio and 20us in live servers
 
 local EnumLogLevel = require "../../level"
 local logsink = require "../../sink"

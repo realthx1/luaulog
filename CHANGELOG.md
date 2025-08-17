@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 * Major project restructure.
-* Optimized common enrichers (**~3000% speed increase**, pure logger takes 4us to run instead of 60us).
+* Optimized common enrichers (**30x speed increase**, pure logger takes 4us to run instead of 60us).
 
 ## [0.1.0] - 2025-08-17
 
