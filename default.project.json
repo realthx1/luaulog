@@ -1,6 +1,7 @@
 {
-  "name": "RbxLog",
-  "tree": {
-    "$path": "src"
-  }
+	"name": "luaulog",
+	"emitLegacyScripts": false,
+	"tree": {
+		"$path": "src"
+	}
 }
