@@ -49,12 +49,11 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name:  ${{ github.ref_name }}
-          prerelease: true
           files: |
             luaulog.rbxm
 
-  # publish:
-  #   name: Publish
+  # publish-wally:
+  #   name: Publish-Wally
   #   needs: [release]
   #   runs-on: ubuntu-latest
   #   steps:
@@ -71,3 +70,5 @@ jobs:
 
   #     - name: Publish
   #       run: wally publish
+
+  # TODO: add pesde publish job
