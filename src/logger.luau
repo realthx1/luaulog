@@ -1,23 +1,21 @@
 --!optimize 2
 --!native
 
-local logsink = require "./log-sink"
-local logenricher = require "./log-enricher"
-local logevent = require "./log-event"
-local LogLevel = require "./log-level"
-local getContext = require "./get-context"
+local logsink = require "./sink"
+local logenricher = require "./enricher"
+local logevent = require "./event"
+local EnumLogLevel = require "./level"
+local getContext = require "./utils/get-context"
 
 local mod = {}
 
 export type Logger = setmetatable<{
-	minLogLevel: LogLevel.LogLevel,
 	sinks: { logsink.LogSink },
 	enrichers: { logenricher.LogEnricher },
 }, { __index: typeof(mod) }>
 
 local function new(enrichers: { logenricher.LogEnricher }?, sinks: { logsink.LogSink }?): Logger
 	local logger: Logger = setmetatable({
-		minLogLevel = LogLevel.Verbose,
 		sinks = sinks or {},
 		enrichers = enrichers or {},
 	}, { __index = mod })
@@ -25,10 +23,6 @@ local function new(enrichers: { logenricher.LogEnricher }?, sinks: { logsink.Log
 	return logger
 end
 
-local function setMinLevel(self: Logger, minLevel: LogLevel.LogLevel): Logger
-	self.minLogLevel = minLevel
-	return self
-end
 local function setSinks(self: Logger, sinks: { logsink.LogSink }): Logger
 	self.sinks = sinks
 	return self
@@ -40,12 +34,11 @@ end
 
 local function write(
 	self: Logger,
-	level: LogLevel.LogLevel,
-	context: { (string | number)? }?,
-	...: any
+	level: EnumLogLevel.Enum,
+	args: { unknown },
+	context: logevent.LogContext?
 ): logevent.LogEvent?
-	if self.minLogLevel > level then return nil end
-	local event: logevent.LogEvent = logevent.new(level, { ... }, context or getContext())
+	local event: logevent.LogEvent = logevent.new(level, args, context or getContext())
 
 	for _, enricher: logenricher.LogEnricher in self.enrichers do
 		enricher:Enrich(event)
@@ -58,25 +51,24 @@ local function write(
 end
 
 local function Verbose(self: Logger, ...: any): logevent.LogEvent?
-	return self:write(LogLevel.Verbose, getContext(), ...) :: logevent.LogEvent?
+	return self:write(EnumLogLevel.Verbose, { ... }, getContext()) :: logevent.LogEvent?
 end
 local function Debug(self: Logger, ...: any): logevent.LogEvent?
-	return self:write(LogLevel.Debugging, getContext(), ...) :: logevent.LogEvent?
+	return self:write(EnumLogLevel.Debugging, { ... }, getContext()) :: logevent.LogEvent?
 end
 local function Info(self: Logger, ...: any): logevent.LogEvent?
-	return self:write(LogLevel.Information, getContext(), ...) :: logevent.LogEvent?
+	return self:write(EnumLogLevel.Information, { ... }, getContext()) :: logevent.LogEvent?
 end
 local function Warn(self: Logger, ...: any): logevent.LogEvent?
-	return self:write(LogLevel.Warning, getContext(), ...) :: logevent.LogEvent?
+	return self:write(EnumLogLevel.Warning, { ... }, getContext()) :: logevent.LogEvent?
 end
 local function Error(self: Logger, ...: any): logevent.LogEvent?
-	return self:write(LogLevel.Error, getContext(), ...) :: logevent.LogEvent?
+	return self:write(EnumLogLevel.Error, { ... }, getContext()) :: logevent.LogEvent?
 end
 local function Fatal(self: Logger, ...: any): logevent.LogEvent?
-	return self:write(LogLevel.Fatal, getContext(), ...) :: logevent.LogEvent?
+	return self:write(EnumLogLevel.Fatal, { ... }, getContext()) :: logevent.LogEvent?
 end
 
-mod.setMinLevel = setMinLevel
 mod.setSinks = setSinks
 mod.setEnrichers = setEnrichers
 

@@ -2,17 +2,17 @@
 --!native
 
 local configuration = require "@self/configuration"
-local logsink = require "@self/log-sink"
-local logenricher = require "@self/log-enricher"
-local logevent = require "@self/log-event"
-local loglevel = require "@self/log-level"
+local logsink = require "@self/sink"
+local logenricher = require "@self/enricher"
+local logevent = require "@self/event"
+local loglevel = require "@self/level"
 local logger = require "@self/logger"
 
-local LogLevelEnricher = require "@self/common/level-enricher"
-local TimestampEnricher = require "@self/common/timestamp-enricher"
-local SourceEnricher = require "@self/common/source-enricher"
-local RobloxLogSink = require "@self/common/roblox-log-sink"
-local TraceEnricher = require "@self/common/trace-enricher"
+local LogLevelEnricher = require "@self/common/enrichers/level-enricher"
+local TimestampEnricher = require "@self/common/enrichers/timestamp-enricher"
+local SourceEnricher = require "@self/common/enrichers/source-enricher"
+local TraceEnricher = require "@self/common/enrichers/trace-enricher"
+local RobloxLogSink = require "@self/common/sinks/roblox-log-sink"
 
 local mod = {}
 
@@ -26,7 +26,7 @@ mod.Logger = logger
 mod.LogLevelEnricher = LogLevelEnricher
 mod.TimestampEnricher = TimestampEnricher
 mod.SourceEnricher = SourceEnricher
-mod.RobloxLogSink = RobloxLogSink
 mod.TraceEnricher = TraceEnricher
+mod.RobloxLogSink = RobloxLogSink
 
 return mod

@@ -1,9 +1,9 @@
 --!optimize 2
 --!native
 
-local LogLevel = require "../log-level"
-local logenricher = require "../log-enricher"
-local logevent = require "../log-event"
+local LogLevel = require "../../level"
+local logenricher = require "../../enricher"
+local logevent = require "../../event"
 
 local formats = {
 	short = {

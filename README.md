@@ -1,5 +1,8 @@
 # luaulog
-Easy to use logging library for Roblox
+**Easy to use logging library for Roblox**
+
+> [!WARNING]  
+> This library is being worked on, many breaking changes are expected and some features are missing.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Wally](https://img.shields.io/github/v/tag/realthx1/luaulog?&style=for-the-badge&label=Wally)](https://wally.run/package/realthx1/luaulog)
@@ -8,15 +11,15 @@ Easy to use logging library for Roblox
 
 ## Installation
 
-Using [Wally](https://wally.run/):
+Using [**Wally**](https://wally.run/):
 ```bash
-log = "realthx1/luaulog@0.1.0"
+log = "realthx1/luaulog@0.2.0"
 ```
-Using [pesde](https://pesde.dev/):
+Using [**pesde**](https://pesde.dev/):
 ```bash
-pesde add wally#realthx1/luaulog@0.1.0 -a log -t roblox
+pesde add wally#realthx1/luaulog@0.2.0 -a log -t roblox
 ```
-Using [npm](https://www.npmjs.com/) ([roblox-ts](https://roblox-ts.com/)):
+Using [**npm**](https://www.npmjs.com/) ([**roblox-ts**](https://roblox-ts.com/)):
 ```bash
 TODO
 ```

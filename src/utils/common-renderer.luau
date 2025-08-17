@@ -1,7 +1,7 @@
 --!optimize 2
 --!native
 
-local logevent = require "../log-event"
+local logevent = require "../event"
 
 return function(event: logevent.LogEvent): (string?, string?)
 	local prefix: string? = nil

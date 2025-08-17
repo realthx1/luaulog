@@ -1,14 +1,14 @@
-local luaulog = require "./"
+local log = require "./"
 
-local logger = luaulog.Logger.new({
-	luaulog.TimestampEnricher(),
-	luaulog.SourceEnricher(2, true),
-	luaulog.LogLevelEnricher(),
-	luaulog.TraceEnricher(),
-}, { luaulog.RobloxLogSink() })
+local logger = log.Logger.new({
+	log.TimestampEnricher(),
+	log.SourceEnricher(true),
+	log.LogLevelEnricher(),
+	log.TraceEnricher(),
+}, { log.RobloxLogSink() })
 
 logger:Verbose("Processing cars (duh)\n", debug.traceback())
-logger:write(luaulog.LogLevel.Debugging, nil, "We feel freaky today\n")
+logger:write(log.LogLevel.Debugging, { "We feel freaky today" })
 
 logger:Verbose("This should be Verbose")
 logger:Debug("This should be Debug")
@@ -17,12 +17,14 @@ logger:Warn("This should be Warn")
 logger:Error("This should be Error")
 logger:Fatal("This should be Fatal")
 
-logger:setMinLevel(luaulog.LogLevel.Information)
-
 logger:Verbose("THIS SHOULDNT PRINT")
 logger:Debug("THIS SHOULDNT PRINT TOO")
 
 local start = os.clock()
-logger:Info("but this should")
+logger.Info(logger, "but this should")
 local endt = os.clock() - start
-logger:Fatal(("%.3f"):format(endt * 1000))
+print(("%.3fus"):format(endt * 1000000))
+
+-- roblox output functions are super expensive (200us)
+-- timestamp enricher is expensive due to DateTime usage
+-- context enricher is expensive due to debug.info and debug.traceback, but this can be improved
