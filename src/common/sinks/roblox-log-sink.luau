@@ -13,9 +13,9 @@ return function(): logsink.LogSink
 
 		local prefix: string?, postfix: string? = render(event)
 		if prefix then
-			outputFn(prefix, unpack { unpack(event.Args), postfix })
+			--outputFn(prefix, unpack { unpack(event.Args), postfix })
 		else
-			outputFn(unpack { unpack(event.Args), postfix })
+			--outputFn(unpack { unpack(event.Args), postfix })
 		end
 	end)
 end

@@ -12,7 +12,6 @@ export type LogEvent = {
 	Timestamp: number,
 	Prefixes: { string },
 	Postfixes: { string },
-	Message: number?,
 	LogLevel: LogLevel.Enum,
 	Context: LogContext?,
 }
@@ -20,10 +19,9 @@ export type LogEvent = {
 local function new(level: LogLevel.Enum, args: { unknown }, context: LogContext?): LogEvent
 	local event: LogEvent = {
 		Args = args,
-		Timestamp = DateTime.now().UnixTimestampMillis,
+		Timestamp = os.time() + os.clock() % 1,
 		Prefixes = {},
 		Postfixes = {},
-		Message = nil,
 		LogLevel = level,
 		Context = context,
 	}

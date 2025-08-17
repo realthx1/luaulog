@@ -1,10 +1,10 @@
 local log = require "./"
 
 local logger = log.Logger.new({
-	log.TimestampEnricher(),
-	log.SourceEnricher(true),
-	log.LogLevelEnricher(),
-	log.TraceEnricher(),
+	-- log.TimestampEnricher(true, true),
+	-- log.SourceEnricher(true),
+	-- log.LogLevelEnricher(),
+	-- log.TraceEnricher(),
 }, { log.RobloxLogSink() })
 
 logger:Verbose("Processing cars (duh)\n", debug.traceback())
@@ -21,7 +21,7 @@ logger:Verbose("THIS SHOULDNT PRINT")
 logger:Debug("THIS SHOULDNT PRINT TOO")
 
 local start = os.clock()
-logger.Info(logger, "but this should")
+logger:Info("but this should")
 local endt = os.clock() - start
 print(("%.3fus"):format(endt * 1000000))
 

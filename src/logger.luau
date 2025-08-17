@@ -5,23 +5,20 @@ local logsink = require "./sink"
 local logenricher = require "./enricher"
 local logevent = require "./event"
 local EnumLogLevel = require "./level"
-local getContext = require "./utils/get-context"
 
 local mod = {}
+
+-- time tradeoff: 2 microseconds
+local function getContext(stackOverride: number?): logevent.LogContext?
+	local ok: boolean, s: string?, n: string?, l: number? = pcall(debug.info, stackOverride or 4, "snl")
+	if not ok then s = nil end
+	return { source = s, name = n, line = l, trace = debug.traceback() }
+end
 
 export type Logger = setmetatable<{
 	sinks: { logsink.LogSink },
 	enrichers: { logenricher.LogEnricher },
 }, { __index: typeof(mod) }>
-
-local function new(enrichers: { logenricher.LogEnricher }?, sinks: { logsink.LogSink }?): Logger
-	local logger: Logger = setmetatable({
-		sinks = sinks or {},
-		enrichers = enrichers or {},
-	}, { __index = mod })
-
-	return logger
-end
 
 local function setSinks(self: Logger, sinks: { logsink.LogSink }): Logger
 	self.sinks = sinks
@@ -67,6 +64,15 @@ local function Error(self: Logger, ...: any): logevent.LogEvent?
 end
 local function Fatal(self: Logger, ...: any): logevent.LogEvent?
 	return self:write(EnumLogLevel.Fatal, { ... }, getContext()) :: logevent.LogEvent?
+end
+
+local function new(enrichers: { logenricher.LogEnricher }?, sinks: { logsink.LogSink }?): Logger
+	local logger: Logger = setmetatable({
+		sinks = sinks or {},
+		enrichers = enrichers or {},
+	}, { __index = mod })
+
+	return logger
 end
 
 mod.setSinks = setSinks
