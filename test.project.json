@@ -5,7 +5,10 @@
 		"$className": "DataModel",
 		"ServerScriptService": {
 			"rbxlog": {
-				"$path": "src"
+				"$path": "src",
+				"test": {
+					"$path": "text.server.luau"
+				}
 			}
 		}
 	}
