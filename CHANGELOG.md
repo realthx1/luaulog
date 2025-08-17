@@ -8,11 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2025-08-14
 
 ### Added
-Filters - they can be used to filter what sinks, enrichers and even entire loggers are used.
+* **Filters** - they can be used to filter what sinks, enrichers and even entire loggers are used.
 
 ### Changed
-Major project restructure.
-Optimized common enrichers (~80% less time, pure logger takes 8us to run)
+* Major project restructure.
+* Optimized common enrichers (**~3000% speed increase**, pure logger takes 4us to run instead of 60us).
 
 ## [0.1.0] - 2025-08-17
 

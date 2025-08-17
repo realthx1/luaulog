@@ -1,6 +1,10 @@
 --!optimize 2
 --!native
 
+-- Roblox output functions (at least in studio) take a STUPIDLY long amount of time to run
+-- we are talking about 50x the time pure logger takes to run
+-- usually, one call of those functions takes 180-260us in studio
+
 local EnumLogLevel = require "../../level"
 local logsink = require "../../sink"
 local logevent = require "../../event"
@@ -13,9 +17,9 @@ return function(): logsink.LogSink
 
 		local prefix: string?, postfix: string? = render(event)
 		if prefix then
-			--outputFn(prefix, unpack { unpack(event.Args), postfix })
+			outputFn(prefix, unpack { unpack(event.Args), postfix })
 		else
-			--outputFn(unpack { unpack(event.Args), postfix })
+			outputFn(unpack { unpack(event.Args), postfix })
 		end
 	end)
 end

@@ -1,14 +1,17 @@
+--!optimize 2
+--!native
+
 local log = require "./"
 
 local logger = log.Logger.new({
-	-- log.TimestampEnricher(true, true),
-	-- log.SourceEnricher(true),
-	-- log.LogLevelEnricher(),
-	-- log.TraceEnricher(),
+	log.TimestampEnricher(true, true),
+	log.SourceEnricher(true, 2),
+	log.LogLevelEnricher(),
+	log.TraceEnricher(),
 }, { log.RobloxLogSink() })
 
-logger:Verbose("Processing cars (duh)\n", debug.traceback())
-logger:write(log.LogLevel.Debugging, { "We feel freaky today" })
+logger:Info("Just an example")
+logger:write(log.LogLevel.Debugging, { "Using an internal function cuz we can" })
 
 logger:Verbose("This should be Verbose")
 logger:Debug("This should be Debug")
@@ -17,14 +20,14 @@ logger:Warn("This should be Warn")
 logger:Error("This should be Error")
 logger:Fatal("This should be Fatal")
 
+-- TODO: filters should prevent these
 logger:Verbose("THIS SHOULDNT PRINT")
 logger:Debug("THIS SHOULDNT PRINT TOO")
 
-local start = os.clock()
-logger:Info("but this should")
-local endt = os.clock() - start
-print(("%.3fus"):format(endt * 1000000))
+local bm_t: number = os.clock()
+logger:Info("but this should print tho")
+local bm_dt: number = os.clock() - bm_t
+print(("%.3fus"):format(bm_dt * 1000000))
 
 -- roblox output functions are super expensive (200us)
 -- timestamp enricher is expensive due to DateTime usage
--- context enricher is expensive due to debug.info and debug.traceback, but this can be improved
