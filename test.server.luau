@@ -1,7 +1,7 @@
 --!optimize 2
 --!native
 
-local log = require(script.Parent) :: any
+local log = require(script.Parent)
 
 local logger = log.Logger.new({
 	log.TimestampEnricher(true, true),

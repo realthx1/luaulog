@@ -7,7 +7,7 @@
 			"rbxlog": {
 				"$path": "src",
 				"test": {
-					"$path": "text.server.luau"
+					"$path": "test.server.luau"
 				}
 			}
 		}
