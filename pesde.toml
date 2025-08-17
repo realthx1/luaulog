@@ -1,0 +1,23 @@
+name = "realthx1/luaulog"
+version = "0.2.0"
+description = "Fast and easy-to-use logging library for Roblox"
+authors = ["realthx1"]
+repository = "https://github.com/realthx1/luaulog"
+license = "MIT"
+includes = ["src/**/*.luau", "pesde.toml", "README.md", "LICENSE", ".luaurc"]
+
+[target]
+environment = "roblox"
+lib = "src/init.luau"
+build_files = ["src/init.luau"]
+
+[indices]
+default = "https://github.com/pesde-pkg/index"
+
+[scripts]
+roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"
+sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
+
+[dev_dependencies]
+scripts = { name = "pesde/scripts_rojo", version = "^0.1.1", target = "lune" }
+rojo = { name = "pesde/rojo", version = "^7.4.4", target = "lune" }
