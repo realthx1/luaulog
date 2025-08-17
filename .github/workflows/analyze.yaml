@@ -1,0 +1,62 @@
+name: analyze
+
+on: [push, pull_request]
+
+jobs:
+    run:
+        analyze:
+          name: Analyze
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Project
+              uses: actions/checkout@v4
+
+            - name: Install Rokit
+              uses: raild3x/setup-rokit@v0.1.0
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Install Wally Packages
+              run: wally install
+
+            - name: Analyze
+              run: |
+                rojo sourcemap default.project.json -o sourcemap.json
+                curl -O https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.lua
+
+                luau-lsp analyze --definitions=globalTypes.d.lua --base-luaurc=.luaurc \
+                    --sourcemap=sourcemap.json --settings=.vscode/settings.json \
+                    --ignore Packages/**/*.lua --ignore Packages/**/*.luau \
+                    src/
+
+        lint:
+          name: Lint
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Project
+              uses: actions/checkout@v4
+
+            - name: Install Rokit
+              uses: raild3x/setup-rokit@v0.1.0
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Lint
+              run: |
+                selene src/
+
+        style:
+          name: Styling
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Project
+              uses: actions/checkout@v4
+
+            - name: Install Rokit
+              uses: raild3x/setup-rokit@v0.1.0
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Styling
+              run: |
+                stylua src/ --check --verify

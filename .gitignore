@@ -1,0 +1,17 @@
+# Roblox Studio files
+/*.rbxlx
+/*.rbxlx.lock
+/*.rbxl
+/*.rbxl.lock
+/*.rbxm
+/*.rbxmx
+
+# rojo
+/sourcemap.json
+
+# wally
+/Packages
+
+# pesde
+/*_packages
+/.pesde

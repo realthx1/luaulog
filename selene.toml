@@ -1,0 +1,8 @@
+std = "roblox"
+
+exclude = ["Packages/**"]
+
+[lints]
+multiple_statements = "allow"
+mixed_table = "allow"
+incorrect_standard_library_use = "allow"

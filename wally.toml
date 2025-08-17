@@ -1,0 +1,21 @@
+[package]
+name = "realthx1/luaulog"
+version = "0.1.0"
+description = "Easy to use logging library for Roblox"
+license = "MIT"
+authors = ["realthx1"]
+repository = "https://github.com/realthx1/luaulog/"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+include = [
+	"default.project.json",
+	"**/*.luau",
+	"wally.toml",
+	"README.md",
+	"LICENSE",
+	".luaurc",
+]
+exclude = ["**", "**/test*"]
+
+
+[dependencies]

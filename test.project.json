@@ -1,0 +1,12 @@
+{
+	"name": "RbxLogTest",
+	"emitLegacyScripts": false,
+	"tree": {
+		"$className": "DataModel",
+		"ServerScriptService": {
+			"rbxlog": {
+				"$path": "src"
+			}
+		}
+	}
+}

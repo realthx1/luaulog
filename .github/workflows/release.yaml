@@ -1,0 +1,72 @@
+name: release
+
+on:
+    push:
+        tags: "v*"
+
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Project
+              uses: actions/checkout@v4
+
+            - name: Install Rokit
+              uses: raild3x/setup-rokit@v0.1.0
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Build
+              run: rojo build --output build.rbxm default.project.json
+
+            - name: Upload Build Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build
+                  path: build.rbxm
+
+    release:
+        name: Release
+        needs: [build]
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: Checkout Project
+              uses: actions/checkout@v4
+
+            - name: Download luaulog Build
+              uses: actions/download-artifact@v4
+              with:
+                  name: build
+                  path: build
+
+            - name: Rename Build
+              run: mv build/build.rbxm luaulog.rbxm
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  name:  ${{ github.ref_name }}
+                  files: |
+                      luaulog.rbxm
+
+    publish:
+        name: Publish
+        needs: [release]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Project
+              uses: actions/checkout@v4
+
+            - name: Install Rokit
+              uses: raild3x/setup-rokit@v0.1.0
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Wally Login
+              run: wally login --token ${{ secrets.WALLY_AUTH_TOKEN }}
+
+            - name: Publish
+              run: wally publish
