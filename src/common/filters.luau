@@ -18,7 +18,8 @@ end
 
 local function LevelListFilter(levels: { EnumLogLevel.Enum }, blacklist: boolean?): logfilter.LogFilter
 	return logfilter.new(function(event: logevent.LogEvent): boolean
-		return not levels[event.LogLevel] and not blacklist
+		local exists: number = levels[event.LogLevel]
+		return if if blacklist then not exists else exists then true else false
 	end)
 end
 
