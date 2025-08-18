@@ -15,3 +15,7 @@
 # pesde
 /*_packages
 /.pesde
+
+# tar files
+*.tar
+*.tar.gz
