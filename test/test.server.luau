@@ -2,7 +2,6 @@
 --!native
 
 local log = require(script.Parent)
-
 local logger = log.Logger.new({
 	log.Enrichers.TimestampEnricher(true, true),
 	log.Enrichers.DynSourceEnricher(true),
@@ -10,7 +9,6 @@ local logger = log.Logger.new({
 	log.Enrichers.TraceEnricher(),
 }, { log.RobloxLogSink() })
 
-logger:Info("Just an example")
 logger:Write(log.LogLevel.Debugging, { "Using an internal function cuz we can" })
 
 logger:Verbose("This should be Verbose")
@@ -21,10 +19,23 @@ logger:Error("This should be Error")
 logger:Fatal("This should be Fatal")
 
 logger:SetFilters({ log.Filters.MinLevelFilter(log.LogLevel.Information) })
-logger:Verbose("THIS SHOULDNT PRINT")
-logger:Debug("THIS SHOULDNT PRINT TOO")
+
+logger:Verbose("FAILED")
+logger:Debug("FAILED")
+
+logger:SetFilters({ log.Filters.LevelListFilter({ [log.LogLevel.Warning] = true }) })
+
+logger:Info("PASSED")
+logger:Warn("FAILED")
+
+logger:SetFilters({ log.Filters.LevelListFilter({ [log.LogLevel.Warning] = true }, true) })
+
+logger:Warn("PASSED")
+logger:Info("FAILED")
+
+logger:SetFilters({})
 
 local bm_t: number = os.clock()
-logger:Info("but this should print tho")
+logger:Debug("Testing speed...")
 local bm_dt: number = os.clock() - bm_t
-print(("%.3fus"):format(bm_dt * 1000000))
+logger:Debug(("DT: %.3fus"):format(bm_dt * 1000000))
