@@ -4,14 +4,14 @@
 local log = require(script.Parent)
 
 local logger = log.Logger.new({
-	log.TimestampEnricher(true, true),
-	log.DynSourceEnricher(true),
-	log.LogLevelEnricher(),
-	log.TraceEnricher(),
+	-- log.Enrichers.TimestampEnricher(true, true),
+	-- log.Enrichers.DynSourceEnricher(true),
+	-- log.Enrichers.LogLevelEnricher(),
+	-- log.Enrichers.TraceEnricher(),
 }, { log.RobloxLogSink() })
 
 logger:Info("Just an example")
-logger:write(log.LogLevel.Debugging, { "Using an internal function cuz we can" })
+logger:Write(log.LogLevel.Debugging, { "Using an internal function cuz we can" })
 
 logger:Verbose("This should be Verbose")
 logger:Debug("This should be Debug")
@@ -20,7 +20,7 @@ logger:Warn("This should be Warn")
 logger:Error("This should be Error")
 logger:Fatal("This should be Fatal")
 
--- TODO: filters should prevent these
+logger:SetFilters({ log.Filters.MinLevelFilter(log.LogLevel.Information) })
 logger:Verbose("THIS SHOULDNT PRINT")
 logger:Debug("THIS SHOULDNT PRINT TOO")
 
