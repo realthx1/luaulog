@@ -16,10 +16,10 @@ local function MaxLevelFilter(level: EnumLogLevel.Enum): logfilter.LogFilter
 	end)
 end
 
-local function LevelListFilter(levels: { EnumLogLevel.Enum }, blacklist: boolean?): logfilter.LogFilter
+local function LevelListFilter(levels: { [EnumLogLevel.Enum]: true }, whitelist: boolean?): logfilter.LogFilter
 	return logfilter.new(function(event: logevent.LogEvent): boolean
-		local exists: number = levels[event.LogLevel]
-		return if if blacklist then not exists else exists then true else false
+		local exists: true = levels[event.LogLevel]
+		return if if whitelist then exists else not exists then true else false
 	end)
 end
 
