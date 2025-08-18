@@ -52,23 +52,23 @@ jobs:
           files: |
             luaulog.rbxm
 
-  # publish-wally:
-  #   name: Publish-Wally
-  #   needs: [release]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout Project
-  #       uses: actions/checkout@v4
+  publish-wally:
+    name: Publish-Wally
+    needs: [release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
 
-  #     - name: Install Rokit
-  #       uses: raild3x/setup-rokit@v0.1.0
-  #       with:
-  #         token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Rokit
+        uses: raild3x/setup-rokit@v0.1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-  #     - name: Wally Login
-  #       run: wally login --token ${{ secrets.WALLY_AUTH_TOKEN }}
+      - name: Wally Login
+        run: wally login --token ${{ secrets.WALLY_AUTH_TOKEN }}
 
-  #     - name: Publish
-  #       run: wally publish
+      - name: Publish
+        run: wally publish
 
   # TODO: add pesde publish job
