@@ -5,24 +5,14 @@ local logevent = require "./event"
 
 local mod = {}
 
-export type LogFilter = setmetatable<{
-	Filter: (self: LogFilter, logevent.LogEvent) -> boolean,
-}, { __index: typeof(mod) }>
+export type LogFilter = (logevent.LogEvent) -> boolean
 
-local function raw(callback: (self: LogFilter, logevent.LogEvent) -> boolean): LogFilter
-	local filter: LogFilter = setmetatable({
-		Filter = callback,
-	}, { __index = mod })
-
-	return filter
-end
-local function new(filterFn: (self: LogFilter, logevent.LogEvent) -> boolean): LogFilter
-	return raw(function(self: LogFilter, event: logevent.LogEvent): boolean
-		return filterFn(self, event)
-	end)
+local function new(filterFn: (logevent.LogEvent) -> boolean): LogFilter
+	return function(event: logevent.LogEvent): boolean
+		return filterFn(event)
+	end
 end
 
-mod.raw = raw
 mod.new = new
 
 return mod

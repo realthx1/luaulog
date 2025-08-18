@@ -9,6 +9,7 @@ local loglevel = require "@self/level"
 local logger = require "@self/logger"
 
 local commonenrichers = require "@self/common/enrichers"
+local commonfilters = require "@self/common/filters"
 local RobloxLogSink = require "@self/common/roblox-log-sink"
 
 local mod = {}
@@ -20,10 +21,8 @@ mod.LogEvent = logevent
 mod.LogLevel = loglevel
 mod.Logger = logger
 
-mod.LogLevelEnricher = commonenrichers.LogLevelEnricher
-mod.TimestampEnricher = commonenrichers.TimestampEnricher
-mod.DynSourceEnricher = commonenrichers.DynSourceEnricher
-mod.TraceEnricher = commonenrichers.TraceEnricher
+mod.Enrichers = commonenrichers
+mod.Filters = commonfilters
 
 mod.RobloxLogSink = RobloxLogSink
 

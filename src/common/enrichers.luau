@@ -34,13 +34,13 @@ local formats = {
 
 local function LogLevelEnricher(formatType: ("short" | "long" | "full")?): logenricher.LogEnricher
 	local formatPack: { string } = formats[formatType] or formats["long"]
-	return logenricher.new(function(_: logenricher.LogEnricher, event: logevent.LogEvent): (string, nil)
+	return logenricher.new(function(event: logevent.LogEvent): (string, nil)
 		return formatPack[event.LogLevel], nil
 	end)
 end
 
 local function DynSourceEnricher(showLine: boolean?, maxParents: number?): logenricher.LogEnricher
-	return logenricher.new(function(_: logenricher.LogEnricher, event: logevent.LogEvent): (string, nil)
+	return logenricher.new(function(event: logevent.LogEvent): (string, nil)
 		maxParents = maxParents or 1
 
 		local context: logevent.LogContext? = event.Context
@@ -68,7 +68,7 @@ local function DynSourceEnricher(showLine: boolean?, maxParents: number?): logen
 end
 
 local function TimestampEnricher(addMilliseconds: boolean?, addDate: boolean?): logenricher.LogEnricher
-	return logenricher.new(function(_: logenricher.LogEnricher, event: logevent.LogEvent): (string, nil)
+	return logenricher.new(function(event: logevent.LogEvent): (string, nil)
 		-- datetime:format is EXPENSIVE, takes 60 microseconds usually, luau implementation takes ~1
 
 		local timestamp: number = event.Timestamp
@@ -87,7 +87,7 @@ local function TimestampEnricher(addMilliseconds: boolean?, addDate: boolean?): 
 end
 
 local function TraceEnricher(): logenricher.LogEnricher
-	return logenricher.new(function(_: logenricher.LogEnricher, event: logevent.LogEvent): (nil, string?)
+	return logenricher.new(function(event: logevent.LogEvent): (nil, string?)
 		return nil, event.Context and event.Context.trace
 	end)
 end
