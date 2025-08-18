@@ -5,7 +5,7 @@ local log = require(script.Parent)
 
 local logger = log.Logger.new({
 	log.TimestampEnricher(true, true),
-	log.SourceEnricher(true),
+	log.DynSourceEnricher(true),
 	log.LogLevelEnricher(),
 	log.TraceEnricher(),
 }, { log.RobloxLogSink() })

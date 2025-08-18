@@ -5,22 +5,20 @@ local logevent = require "./event"
 
 local mod = {}
 
-export type LogEnricher = setmetatable<{
-	Enrich: (self: LogEnricher, logevent.LogEvent) -> (),
+export type LogFilter = setmetatable<{
+	Filter: (self: LogFilter, logevent.LogEvent) -> boolean,
 }, { __index: typeof(mod) }>
 
-local function raw(callback: (self: LogEnricher, logevent.LogEvent) -> ()): LogEnricher
-	local enricher: LogEnricher = setmetatable({
-		Enrich = callback,
+local function raw(callback: (self: LogFilter, logevent.LogEvent) -> boolean): LogFilter
+	local filter: LogFilter = setmetatable({
+		Filter = callback,
 	}, { __index = mod })
 
-	return enricher
+	return filter
 end
-local function new(enrichFn: (self: LogEnricher, logevent.LogEvent) -> (string?, string?)): LogEnricher
-	return raw(function(self: LogEnricher, event: logevent.LogEvent)
-		local prefix: string?, postfix: string? = enrichFn(self, event)
-		if prefix then table.insert(event.Prefixes, prefix) end
-		if postfix then table.insert(event.Postfixes, postfix) end
+local function new(filterFn: (self: LogFilter, logevent.LogEvent) -> boolean): LogFilter
+	return raw(function(self: LogFilter, event: logevent.LogEvent): boolean
+		return filterFn(self, event)
 	end)
 end
 

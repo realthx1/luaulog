@@ -2,16 +2,19 @@
 --!native
 
 local logevent = require "./event"
+local logfilter = require "./filter"
 
 local mod = {}
 
 export type LogEnricher = setmetatable<{
 	Enrich: (self: LogEnricher, logevent.LogEvent) -> (),
+	filters: { logfilter.LogFilter },
 }, { __index: typeof(mod) }>
 
 local function raw(enricherFn: (self: LogEnricher, logevent.LogEvent) -> ()): LogEnricher
 	local enricher: LogEnricher = setmetatable({
 		Enrich = enricherFn,
+		filters = {},
 	}, { __index = mod })
 
 	return enricher

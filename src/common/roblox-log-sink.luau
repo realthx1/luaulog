@@ -5,10 +5,10 @@
 -- we are talking about 30x in studio and 4x the time pure logger call takes
 -- the functions take 120us in studio and 20us in live servers
 
-local EnumLogLevel = require "../../level"
-local logsink = require "../../sink"
-local logevent = require "../../event"
-local render = require "../../utils/common-renderer"
+local EnumLogLevel = require "../level"
+local logsink = require "../sink"
+local logevent = require "../event"
+local render = require "../utils/common-renderer"
 
 return function(): logsink.LogSink
 	return logsink.new(function(_: logsink.LogSink, event: logevent.LogEvent)

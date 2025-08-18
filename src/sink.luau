@@ -2,16 +2,19 @@
 --!native
 
 local logevent = require "./event"
+local logfilter = require "./filter"
 
 local mod = {}
 
 export type LogSink = setmetatable<{
 	Emit: (self: LogSink, logevent.LogEvent) -> (),
+	filters: { logfilter.LogFilter },
 }, { __index: typeof(mod) }>
 
 local function raw(emitter: (self: LogSink, logevent.LogEvent) -> ()): LogSink
 	local logsink: LogSink = setmetatable({
 		Emit = emitter,
+		filters = {},
 	}, { __index = mod })
 
 	return logsink
