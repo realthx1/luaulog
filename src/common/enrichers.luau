@@ -45,7 +45,7 @@ local function DynSourceEnricher(showLine: boolean?, maxParents: number?): logen
 
 		local context: logevent.LogContext? = event.Context
 		if not context then return "?/?" .. (if showLine then ":0" else ""), nil end
-		local sourceStr: string?, debugName: string?, lineNum: number? = context.source, context.name, context.line
+		local sourceStr: string?, debugName: string?, lineNum: number? = context.Source, context.Name, context.Line
 
 		local source: string = ""
 
@@ -88,7 +88,7 @@ end
 
 local function TraceEnricher(): logenricher.LogEnricher
 	return logenricher.new(function(event: logevent.LogEvent): (nil, string?)
-		return nil, event.Context and event.Context.trace
+		return nil, event.Context and event.Context.Trace
 	end)
 end
 

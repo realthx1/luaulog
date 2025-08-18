@@ -5,7 +5,7 @@ local LogLevel = require "./level"
 
 local mod = {}
 
-export type LogContext = { source: string?, name: string?, line: number?, trace: string? }
+export type LogContext = { Source: string?, Name: string?, Line: number?, Trace: string? }
 
 export type LogEvent = {
 	Args: { unknown },

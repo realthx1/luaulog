@@ -4,10 +4,10 @@
 local log = require(script.Parent)
 
 local logger = log.Logger.new({
-	-- log.Enrichers.TimestampEnricher(true, true),
-	-- log.Enrichers.DynSourceEnricher(true),
-	-- log.Enrichers.LogLevelEnricher(),
-	-- log.Enrichers.TraceEnricher(),
+	log.Enrichers.TimestampEnricher(true, true),
+	log.Enrichers.DynSourceEnricher(true),
+	log.Enrichers.LogLevelEnricher(),
+	log.Enrichers.TraceEnricher(),
 }, { log.RobloxLogSink() })
 
 logger:Info("Just an example")

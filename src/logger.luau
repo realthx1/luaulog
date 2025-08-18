@@ -9,12 +9,12 @@ local EnumLogLevel = require "./level"
 
 local mod = {}
 
--- time tradeoff: 2 microseconds
+-- time tradeoff: 1-2 microseconds
 local function getContext(stackLevel: number?): logevent.LogContext?
 	stackLevel = stackLevel or 4
 	local ok: boolean, s: string?, n: string?, l: number? = pcall(debug.info, stackLevel, "snl")
 	if not ok then s = nil end
-	return { source = s, name = n, line = l, trace = debug.traceback(nil, stackLevel) }
+	return { Source = s, Name = n, Line = l, Trace = debug.traceback(nil, stackLevel - 1) }
 end
 
 export type Logger = setmetatable<{
