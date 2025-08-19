@@ -20,7 +20,7 @@ local function raw(callback: (logevent.LogEvent) -> ()): LogEnricher
 	return enricher
 end
 local function new(callback: (logevent.LogEvent) -> (string?, string?)): LogEnricher
-	return raw(function(event: logevent.LogEvent)
+	return raw(function(event: logevent.LogEvent): ()
 		local prefix: string?, postfix: string? = callback(event)
 		if prefix then table.insert(event.Prefixes, prefix) end
 		if postfix then table.insert(event.Postfixes, postfix) end

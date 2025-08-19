@@ -8,22 +8,22 @@ local mod = {}
 export type LogContext = { Source: string?, Name: string?, Line: number?, Trace: string? }
 
 export type LogEvent = {
-	Args: { unknown },
+	LogLevel: LogLevel.Enum,
 	Timestamp: number,
+	Context: LogContext?,
+	Args: { unknown },
 	Prefixes: { string },
 	Postfixes: { string },
-	LogLevel: LogLevel.Enum,
-	Context: LogContext?,
 }
 
 local function new(level: LogLevel.Enum, args: { unknown }, context: LogContext?): LogEvent
 	local event: LogEvent = {
-		Args = args,
+		LogLevel = level,
 		Timestamp = os.time() + os.clock() % 1,
+		Context = context,
+		Args = args,
 		Prefixes = {},
 		Postfixes = {},
-		LogLevel = level,
-		Context = context,
 	}
 	return event
 end

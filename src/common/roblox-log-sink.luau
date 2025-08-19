@@ -10,16 +10,44 @@ local logsink = require "../sink"
 local logevent = require "../event"
 local render = require "../utils/common-renderer"
 
-return function(): logsink.LogSink
-	return logsink.new(function(event: logevent.LogEvent)
-		local outputFn = print
-		if event.LogLevel > EnumLogLevel.Information then outputFn = warn end
+export type RobloxLogSinkConfig = {
+	--- Determines if the sink should throw errors instead of using calling warn
+	ThrowErrors: boolean?,
+	--[=[
+		Custom function that renders and returns prefixes and postfixes as strings
+		Accepts LogEvent as the first parameter
+	]=]
+	CustomRenderer: ((logevent.LogEvent) -> (string?, string?))?,
+}
 
-		local prefix: string?, postfix: string? = render(event)
-		if prefix then
-			outputFn(prefix, unpack { unpack(event.Args), postfix })
+return function(config: RobloxLogSinkConfig?): logsink.LogSink
+	local renderer: (logevent.LogEvent) -> (string?, string?) = render
+	local throwErrors: boolean = false
+	if config then
+		renderer = config.CustomRenderer or renderer
+		if config.ThrowErrors ~= nil then throwErrors = config.ThrowErrors end
+	end
+	return logsink.new(function(event: logevent.LogEvent): ()
+		local logLevel: number = event.LogLevel
+		local outputFn: <T...>(T...) -> () = print
+		if logLevel > EnumLogLevel.Information then outputFn = warn end
+
+		local prefix: string?, postfix: string? = renderer(event)
+		if throwErrors and logLevel >= EnumLogLevel.Error then
+			local fullRender: string = prefix and prefix .. " " or ""
+			for _, arg: unknown in event.Args do
+				fullRender ..= tostring(arg) .. " "
+			end
+			if postfix then
+				fullRender ..= "\n" .. postfix
+			end
+			error(fullRender)
 		else
-			outputFn(unpack { unpack(event.Args), postfix })
+			if prefix then
+				outputFn(prefix, unpack { unpack(event.Args), postfix })
+			else
+				outputFn(unpack { unpack(event.Args), postfix })
+			end
 		end
 	end)
 end

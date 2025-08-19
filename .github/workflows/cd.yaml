@@ -1,13 +1,19 @@
-name: release
+name: CD
 
 on:
   push:
     tags: "v*"
+    branches: ["main"]
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Project
         uses: actions/checkout@v4
@@ -30,6 +36,7 @@ jobs:
     name: Release
     needs: [build]
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     permissions:
       contents: write
     steps:
@@ -56,6 +63,7 @@ jobs:
     name: Publish-Wally
     needs: [release]
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Project
         uses: actions/checkout@v4

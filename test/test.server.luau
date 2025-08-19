@@ -38,4 +38,4 @@ logger:SetFilters({})
 local bm_t: number = os.clock()
 logger:Debug("Testing speed...")
 local bm_dt: number = os.clock() - bm_t
-logger:Debug(("DT: %.3fus"):format(bm_dt * 1000000))
+print(("DT: %.3fus"):format(bm_dt * 1000000))

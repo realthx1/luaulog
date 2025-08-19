@@ -12,7 +12,7 @@ local mod = {}
 -- time tradeoff: 1-2 microseconds
 local function getContext(stackLevel: number?): logevent.LogContext?
 	stackLevel = stackLevel or 4
-	local ok: boolean, s: string?, n: string?, l: number? = pcall(debug.info, stackLevel, "snl")
+	local ok: boolean, s: string?, n: string?, l: number? = pcall(debug.info, stackLevel :: any, "snl" :: any)
 	if not ok then s = nil end
 	return { Source = s, Name = n, Line = l, Trace = debug.traceback(nil, stackLevel - 1) }
 end
@@ -44,7 +44,7 @@ local function Write(
 ): logevent.LogEvent?
 	local event: logevent.LogEvent = logevent.new(level, args, context or getContext())
 
-	local loggerFilters = self.filters
+	local loggerFilters: { logfilter.LogFilter } = self.filters
 	local loggerPass: boolean = true
 	for _, filter: (logevent.LogEvent) -> boolean in loggerFilters do
 		loggerPass = filter(event)
