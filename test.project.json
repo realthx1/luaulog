@@ -1,10 +1,10 @@
 {
-	"name": "RbxLogTest",
+	"name": "Test",
 	"emitLegacyScripts": false,
 	"tree": {
 		"$className": "DataModel",
 		"ServerScriptService": {
-			"rbxlog": {
+			"luaulog": {
 				"$path": "src",
 				"test": {
 					"$path": "test/test.server.luau"

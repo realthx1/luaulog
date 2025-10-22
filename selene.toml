@@ -1,6 +1,6 @@
 std = "roblox"
 
-exclude = ["Packages/**", "*_packages/**", ".pesde/**"]
+exclude = ["*_packages/**", ".pesde/**"]
 
 [lints]
 multiple_statements = "allow"

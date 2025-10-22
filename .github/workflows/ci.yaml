@@ -2,6 +2,10 @@ name: CI
 
 on: [push, pull_request]
 
+concurrency:
+  # Ensure this workflow does not run twice at the same time
+  group: ${{ github.workflow }}
+
 jobs:
   analyze:
     name: Analyze
@@ -10,22 +14,16 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v4
 
-      - name: Install Rokit
-        uses: raild3x/setup-rokit@v0.1.0
+      - name: Install Pesde
+        uses: lumin-org/setup-pesde@v0.4.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PESDE_AUTH_TOKEN }}
 
-      - name: Install Wally Packages
-        run: wally install
+      - name: Install Pesde Dependencies
+        run: pesde install --locked
 
       - name: Analyze
-        run: |
-          rojo sourcemap default.project.json -o sourcemap.json
-          curl -O https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.lua
-
-          luau-lsp analyze --definitions=globalTypes.d.lua --base-luaurc=.luaurc \
-              --sourcemap=sourcemap.json --settings=.vscode/settings.json --flag:LuauSolverV2=true \
-              --no-flags-enabled src/
+        run: pesde run analyze
 
   lint:
     name: Lint
@@ -34,10 +32,13 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v4
 
-      - name: Install Rokit
-        uses: raild3x/setup-rokit@v0.1.0
+      - name: Install Pesde
+        uses: lumin-org/setup-pesde@v0.4.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PESDE_AUTH_TOKEN }}
+
+      - name: Install Pesde Dependencies
+        run: pesde install --locked
 
       - name: Lint
         run: |
@@ -50,10 +51,13 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v4
 
-      - name: Install Rokit
-        uses: raild3x/setup-rokit@v0.1.0
+      - name: Install Pesde
+        uses: lumin-org/setup-pesde@v0.4.1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PESDE_AUTH_TOKEN }}
+
+      - name: Install Pesde Dependencies
+        run: pesde install --locked
 
       - name: Styling
         run: |

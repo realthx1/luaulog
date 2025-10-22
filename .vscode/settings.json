@@ -3,7 +3,6 @@
 	"luau-lsp.completion.imports.stringRequires.enabled": true,
 	"luau-lsp.completion.imports.requireStyle": "alwaysRelative",
 	"luau-lsp.ignoreGlobs": [
-		"Packages/**",
 		"*_packages/**",
 		".pesde/**"
 	],

@@ -1,8 +1,8 @@
 {
-	"languageMode": "strict",
-	"lint": {
-		"*": true
-	},
-	"lintErrors": false,
-	"typeErrors": true
+  "languageMode": "strict",
+  "lint": {
+    "*": true
+  },
+  "lintErrors": false,
+  "typeErrors": true
 }
