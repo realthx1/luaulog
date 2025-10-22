@@ -57,8 +57,6 @@ local analyzeArgs = {
 	".vscode/settings.json",
 	"--ignore",
 	"*_packages/**",
-	"--ignore",
-	"src/**",
 	"--platform",
 	"roblox",
 }
