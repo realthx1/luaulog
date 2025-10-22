@@ -11,6 +11,9 @@ environment = "roblox"
 build_files = ["src"]
 lib = "src/init.luau"
 
+[scripts]
+analyze = ".lune/analyze.luau"
+
 [indices]
 default = "https://github.com/pesde-pkg/index"
 
