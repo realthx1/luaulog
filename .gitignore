@@ -9,12 +9,12 @@
 # rojo
 /sourcemap.json
 
-# wally
-/Packages
-
 # pesde
 /*_packages
 /.pesde
+
+# typedefs
+globalTypes.d.lua
 
 # tar files
 *.tar
