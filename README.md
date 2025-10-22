@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Wally](https://img.shields.io/github/v/tag/realthx1/luaulog?&style=for-the-badge&label=Wally)](https://wally.run/package/realthx1/luaulog)
-[![pesde](https://img.shields.io/github/v/tag/realthx1/luaulog?&style=for-the-badge&label=pesde)](https://pesde.dev/package/realthx1/luaulog)
+[![pesde](https://img.shields.io/github/v/tag/realthx1/luaulog?&style=for-the-badge&label=pesde)](https://pesde.dev/packages/realthx1/luaulog)
 [![Analyze Action Status](https://img.shields.io/github/actions/workflow/status/realthx1/luaulog/ci.yaml?style=for-the-badge&label=CI)](https://github.com/realthx1/luaulog/actions/workflows/ci.yaml)
 
 ## Installation
