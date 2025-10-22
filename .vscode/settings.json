@@ -6,5 +6,8 @@
 		"*_packages/**",
 		".pesde/**"
 	],
+	"luau-lsp.completion.imports.ignoreGlobs": [
+		"*_packages/.pesde/**"
+	],
 	"luau-lsp.sourcemap.rojoProjectFile": "test.project.json"
 }

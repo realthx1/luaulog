@@ -17,11 +17,11 @@ local function getContext(stackLevel: number?): logevent.LogContext?
 	return { Source = s, Name = n, Line = l, Trace = debug.traceback(nil, stackLevel - 1) }
 end
 
-export type Logger = setmetatable<{
+export type Logger = {
 	sinks: { logsink.LogSink },
 	enrichers: { logenricher.LogEnricher },
 	filters: { logfilter.LogFilter },
-}, { __index: typeof(mod) }>
+} & typeof(setmetatable({}, { __index = mod }))
 
 local function setSinks(self: Logger, sinks: { logsink.LogSink }): Logger
 	self.sinks = sinks
