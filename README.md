@@ -13,11 +13,11 @@
 
 Using [**Wally**](https://wally.run/):
 ```bash
-log = "realthx1/luaulog@0.2.0"
+log = "realthx1/luaulog@0.2.1"
 ```
 Using [**pesde**](https://pesde.dev/):
 ```bash
-pesde add wally#realthx1/luaulog@0.2.0 -a log -t roblox
+pesde add wally#realthx1/luaulog -a log -t roblox
 ```
 Using [**npm**](https://www.npmjs.com/) ([**roblox-ts**](https://roblox-ts.com/)):
 ```bash
