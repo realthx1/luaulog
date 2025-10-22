@@ -1,6 +1,6 @@
 [package]
 name = "realthx1/luaulog"
-version = "0.2.0"
+version = "0.2.1"
 description = "Easy-to-use and fast logging library for Roblox"
 license = "MIT"
 authors = ["realthx1"]
