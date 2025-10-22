@@ -65,7 +65,7 @@ local analyzeArgs = {
 for flag: string, value: string in flags do
 	table.insert(analyzeArgs, "--flag:" .. flag .. "=" .. value)
 end
-table.insert(analyzeArgs, "src-new/")
+table.insert(analyzeArgs, "src/")
 
 local analyzeRes: process.ExecResult = run("luau_lsp", analyzeArgs)
 if not analyzeRes.ok then
