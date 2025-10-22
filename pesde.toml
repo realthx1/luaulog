@@ -1,5 +1,5 @@
 name = "realthx1/luaulog"
-version = "0.2.0"
+version = "0.2.1"
 description = "Fast and easy-to-use logging library for Roblox"
 authors = ["realthx1"]
 repository = "https://github.com/realthx1/luaulog"

@@ -25,4 +25,4 @@ TODO
 ```
 
 ## Usage
-TODO
+Refer to the [test script](./test/test.server.luau) for usage examples.

@@ -86,4 +86,25 @@ jobs:
       - name: Publish
         run: wally publish
 
-  # TODO: add pesde publish job
+  publish-pesde:
+    name: Publish-Pesde
+    needs: [release]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
+
+      - name: Install Pesde
+        uses: lumin-org/setup-pesde@v0.4.1
+        with:
+          token: ${{ secrets.PESDE_AUTH_TOKEN }}
+
+      - name: Install Pesde Dependencies
+        run: pesde install --locked
+
+      - name: Pesde Login
+        run: pesde auth login --token ${{ secrets.PESDE_AUTH_TOKEN }}
+
+      - name: Publish
+        run: pesde publish -y
