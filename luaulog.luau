@@ -1,0 +1,2 @@
+--!native
+--!optimize 2

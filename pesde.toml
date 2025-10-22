@@ -1,15 +1,15 @@
 name = "realthx1/luaulog"
-version = "0.2.1"
-description = "Fast and easy-to-use logging library for Roblox"
+version = "1.0.0"
+description = "Fast and easy-to-use logging library for Luau"
 authors = ["realthx1"]
 repository = "https://github.com/realthx1/luaulog"
 license = "MIT"
-includes = ["src/**/*", "pesde.toml", "README.md", "LICENSE", ".luaurc", "docs"]
+includes = ["luaulog.luau", "README.md", "LICENSE", ".luaurc", "docs"]
 
 [target]
 environment = "roblox"
-build_files = ["src"]
-lib = "src/init.luau"
+build_files = ["luaulog.luau"]
+lib = "luaulog.luau"
 
 [scripts]
 analyze = ".lune/analyze.luau"
