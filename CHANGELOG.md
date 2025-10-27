@@ -8,7 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.0] - 2025-10-27
 
 ### Changed
-* Renamed Verbose log level to Trace, backwards compatability included. (#3)
+* Renamed Verbose log level to Trace, backwards compatability included. ([PR #3](https://github.com/realthx1/luaulog/pull/3))
+
+### Fixed
+* Fixed roblox-log-sink not outputting more than 1 argument. ([issue #2](https://github.com/realthx1/luaulog/issues/2))
 
 ## [0.2.1] - 2025-10-22
 Finally getting back to developing this library.

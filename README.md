@@ -13,7 +13,7 @@
 
 Using [**Wally**](https://wally.run/):
 ```bash
-log = "realthx1/luaulog@0.2.1"
+log = "realthx1/luaulog@0.3.0"
 ```
 Using [**pesde**](https://pesde.dev/):
 ```bash
