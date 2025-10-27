@@ -13,9 +13,9 @@ local function run(prog: string, args: { string }, env: { [string]: string }?): 
 	return process.exec(prog, args, { stdio = "forward", env = env })
 end
 
-local srcmapRes: process.ExecResult = run("rojo", { "sourcemap", "--output", "sourcemap.json" })
+local srcmapRes: process.ExecResult = run("argon", { "sourcemap", "--output", "sourcemap.json" })
 if not srcmapRes.ok then
-	stdio.ewrite(`Rojo encountered an error (code {srcmapRes.code})\n{srcmapRes.stdout}\n{srcmapRes.stderr}\n`)
+	stdio.ewrite(`Argon encountered an error (code {srcmapRes.code})\n{srcmapRes.stdout}\n{srcmapRes.stderr}\n`)
 	process.exit(1)
 end
 
