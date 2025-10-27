@@ -34,7 +34,7 @@ jobs:
         run: argon build --output build.rbxm default.project.json
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v5
         with:
           name: build
           path: build.rbxm
@@ -48,10 +48,10 @@ jobs:
       contents: write
     steps:
       - name: Checkout Project
-        uses: actions/checkout
+        uses: actions/checkout@v5
 
       - name: Download luaulog Build
-        uses: actions/download-artifact
+        uses: actions/download-artifact@v6
         with:
           name: build
           path: build
@@ -60,7 +60,7 @@ jobs:
         run: mv build/build.rbxm luaulog.rbxm
 
       - name: Create Release
-        uses: softprops/action-gh-release
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             luaulog.rbxm
@@ -72,10 +72,10 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Project
-        uses: actions/checkout
+        uses: actions/checkout@v5
 
       - name: Install Rokit
-        uses: raild3x/setup-rokit
+        uses: raild3x/setup-rokit@v0.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -92,10 +92,10 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Project
-        uses: actions/checkout
+        uses: actions/checkout@v5
 
       - name: Install Pesde
-        uses: lumin-org/setup-pesde
+        uses: lumin-org/setup-pesde@v0.4.1
         with:
           token: ${{ secrets.PESDE_AUTH_TOKEN }}
 
