@@ -15,7 +15,7 @@ local formats = {
 		[EnumLogLevel.Fatal] = "FTL",
 	},
 	long = {
-		[EnumLogLevel.Verbose] = "VERBOSE",
+		[EnumLogLevel.Verbose] = "TRACE",
 		[EnumLogLevel.Debugging] = "DEBUG",
 		[EnumLogLevel.Information] = "INFO",
 		[EnumLogLevel.Warning] = "WARN",
