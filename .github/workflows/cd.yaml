@@ -20,10 +20,10 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v4
+        uses: actions/checkout
 
       - name: Install Pesde
-        uses: lumin-org/setup-pesde@v0.4.1
+        uses: lumin-org/setup-pesde
         with:
           token: ${{ secrets.PESDE_AUTH_TOKEN }}
 
@@ -34,7 +34,7 @@ jobs:
         run: argon build --output build.rbxm default.project.json
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact
         with:
           name: build
           path: build.rbxm
@@ -48,10 +48,10 @@ jobs:
       contents: write
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v4
+        uses: actions/checkout
 
       - name: Download luaulog Build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact
         with:
           name: build
           path: build
@@ -60,9 +60,8 @@ jobs:
         run: mv build/build.rbxm luaulog.rbxm
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release
         with:
-          name: ${{ github.ref_name }}
           files: |
             luaulog.rbxm
 
@@ -73,10 +72,10 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v4
+        uses: actions/checkout
 
       - name: Install Rokit
-        uses: raild3x/setup-rokit@v0.1.0
+        uses: raild3x/setup-rokit
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -93,10 +92,10 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v4
+        uses: actions/checkout
 
       - name: Install Pesde
-        uses: lumin-org/setup-pesde@v0.4.1
+        uses: lumin-org/setup-pesde
         with:
           token: ${{ secrets.PESDE_AUTH_TOKEN }}
 
