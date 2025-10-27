@@ -31,7 +31,7 @@ jobs:
         run: pesde install --locked
 
       - name: Build
-        run: rojo build --output build.rbxm default.project.json
+        run: argon build --output build.rbxm default.project.json
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
