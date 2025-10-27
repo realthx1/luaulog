@@ -2,7 +2,9 @@
 --!native
 
 local enumLogLevel = {
+	--- backwards compatability, use Trace instead
 	Verbose = 2,
+	Trace = 2,
 	Debugging = 3,
 	Information = 4,
 	Warning = 5,
