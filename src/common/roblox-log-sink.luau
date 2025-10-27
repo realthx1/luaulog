@@ -43,11 +43,17 @@ return function(config: RobloxLogSinkConfig?): logsink.LogSink
 			end
 			error(fullRender)
 		else
+			local fullArgs: { unknown } = table.create(#event.Args + 2)
+
 			if prefix then
-				outputFn(prefix, unpack { unpack(event.Args), postfix })
+				table.insert(fullArgs, prefix)
+				table.move(event.Args, 1, #event.Args, 2, fullArgs)
 			else
-				outputFn(unpack { unpack(event.Args), postfix })
+				table.move(event.Args, 1, #event.Args, 1, fullArgs)
 			end
+
+			if postfix then table.insert(fullArgs, postfix) end
+			outputFn(unpack(fullArgs))
 		end
 	end)
 end

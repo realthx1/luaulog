@@ -18,10 +18,10 @@ analyze = ".lune/analyze.luau"
 default = "https://github.com/pesde-pkg/index"
 
 [dev_dependencies]
-rojo = { name = "pesde/rojo", version = "^7.6.0", target = "lune" }
 selene = { name = "pesde/selene", version = "^0.29.0+toolchainlib.1", target = "lune" }
 stylua = { name = "pesde/stylua", version = "^2.3.0", target = "lune" }
 luau_lsp = { name = "pesde/luau_lsp", version = "^1.55.0", target = "lune" }
+argon = { name = "pesde/argon", version = "^2.0.26+toolchainlib.1", target = "lune" }
 
 [engines]
 lune = "^0.10.4"

@@ -36,6 +36,8 @@ logger:Info("FAILED")
 
 logger:SetFilters({})
 
+logger:Info("Multiple", "Args", true, 123)
+
 local bm_t: number = os.clock()
 logger:Debug("Testing speed...")
 local bm_dt: number = os.clock() - bm_t

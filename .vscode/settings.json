@@ -1,4 +1,5 @@
 {
+	"luau-lsp.sourcemap.generatorCommand": "argon sourcemap -o sourcemap.json",
 	"luau-lsp.fflags.enableNewSolver": true,
 	"luau-lsp.completion.imports.stringRequires.enabled": true,
 	"luau-lsp.completion.imports.requireStyle": "alwaysRelative",
