@@ -7,7 +7,7 @@ local logevent = require "../event"
 
 local formats = {
 	short = {
-		[EnumLogLevel.Verbose] = "VRB",
+		[EnumLogLevel.Trace] = "TRC",
 		[EnumLogLevel.Debugging] = "DBG",
 		[EnumLogLevel.Information] = "INF",
 		[EnumLogLevel.Warning] = "WRN",
@@ -15,7 +15,7 @@ local formats = {
 		[EnumLogLevel.Fatal] = "FTL",
 	},
 	long = {
-		[EnumLogLevel.Verbose] = "VERBOSE",
+		[EnumLogLevel.Trace] = "TRACE",
 		[EnumLogLevel.Debugging] = "DEBUG",
 		[EnumLogLevel.Information] = "INFO",
 		[EnumLogLevel.Warning] = "WARN",
@@ -23,7 +23,7 @@ local formats = {
 		[EnumLogLevel.Fatal] = "FATAL",
 	},
 	full = {
-		[EnumLogLevel.Verbose] = "VERBOSE",
+		[EnumLogLevel.Trace] = "TRACE",
 		[EnumLogLevel.Debugging] = "DEBUGGING",
 		[EnumLogLevel.Information] = "INFORMATION",
 		[EnumLogLevel.Warning] = "WARNING",
